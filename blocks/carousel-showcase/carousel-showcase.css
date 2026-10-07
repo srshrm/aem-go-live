@@ -1,0 +1,205 @@
+/* carousel-showcase: framed screenshot slider + side glass arrows + tout labels
+   values extracted from frame.io (CarouselWithToutsDesktop / Mobile) */
+.carousel-showcase {
+  color: var(--text-color);
+}
+
+.carousel-showcase .carousel-showcase-stage {
+  position: relative;
+  box-sizing: border-box;
+  padding: 6px;
+  border: 1px solid rgb(157 157 255 / 5%);
+  border-radius: 10px;
+  background-color: rgb(157 157 255 / 5%);
+}
+
+.carousel-showcase .carousel-showcase-slides {
+  padding: 0;
+  border-radius: 2px;
+  display: flex;
+  margin: 0;
+  list-style: none;
+  overflow: scroll clip;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel-showcase .carousel-showcase-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-showcase .carousel-showcase-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+}
+
+.carousel-showcase .carousel-showcase-slide-image {
+  overflow: hidden;
+  border-radius: 2px;
+  line-height: 0;
+  aspect-ratio: 16 / 9;
+}
+
+.carousel-showcase .carousel-showcase-slide-image picture,
+.carousel-showcase .carousel-showcase-slide-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-showcase .carousel-showcase-slide-image img {
+  object-fit: cover;
+}
+
+/* side arrows: hidden on mobile (source mobile has none, swipe + tabs) */
+.carousel-showcase .carousel-showcase-navigation {
+  display: none;
+}
+
+.carousel-showcase .carousel-showcase-navigation button {
+  position: relative;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgb(157 157 255 / 5%);
+  border-radius: 100%;
+  background: radial-gradient(1386.01% 199.24% at 2.29% 8.82%, rgb(163 164 191 / 20%) 0%, rgb(193 194 217 / 11%) 44.34%);
+  box-shadow: inset 0 0 0 1.25px rgb(157 157 255 / 5%);
+  backdrop-filter: blur(15px);
+  color: var(--text-color);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* hover fill */
+.carousel-showcase .carousel-showcase-navigation button::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background-color: var(--text-color);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0, 0.44, 0.6, 1);
+}
+
+/* arrow icon (source svg path, 44x44 viewBox) */
+.carousel-showcase .carousel-showcase-navigation button::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath fill-rule='evenodd' d='M18.68 22.764h8.526a.78.78 0 1 0 0-1.56H18.68l2.769-2.77a.78.78 0 0 0-1.103-1.103l-4.101 4.101a.78.78 0 0 0 0 1.104l4.1 4.1a.78.78 0 0 0 1.104-1.103z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  transition: background-color 0.3s cubic-bezier(0, 0.44, 0.6, 1) 0.05s;
+}
+
+.carousel-showcase .carousel-showcase-navigation .carousel-showcase-next::after {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath fill-rule='evenodd' d='M25.323 22.765h-8.527a.78.78 0 0 1 0-1.56h8.526l-2.769-2.77a.78.78 0 0 1 1.103-1.103l4.101 4.101a.78.78 0 0 1 0 1.103l-4.1 4.101a.78.78 0 0 1-1.104-1.103z'/%3E%3C/svg%3E");
+}
+
+.carousel-showcase .carousel-showcase-navigation button:focus-visible {
+  outline: 2px solid var(--link-hover-color);
+  outline-offset: 2px;
+}
+
+.carousel-showcase .carousel-showcase-navigation button[aria-disabled='true'] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .carousel-showcase .carousel-showcase-navigation button:hover::before {
+    opacity: 1;
+  }
+
+  .carousel-showcase .carousel-showcase-navigation button:hover {
+    color: #12131d;
+  }
+}
+
+/* tout labels */
+.carousel-showcase .carousel-showcase-labels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.carousel-showcase .carousel-showcase-label {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 15px;
+  text-align: start;
+  white-space: normal;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.5s ease-out;
+}
+
+.carousel-showcase .carousel-showcase-label.carousel-showcase-label-active {
+  opacity: 1;
+}
+
+.carousel-showcase .carousel-showcase-label:focus-visible {
+  outline: 2px solid var(--link-hover-color);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .carousel-showcase .carousel-showcase-label:hover {
+    opacity: 1;
+  }
+}
+
+.carousel-showcase .carousel-showcase-label-title {
+  display: block;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 19.5px;
+}
+
+.carousel-showcase .carousel-showcase-label-text {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-color-muted);
+  font-size: 15px;
+  line-height: 21.75px;
+}
+
+@media (width >= 900px) {
+  .carousel-showcase {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-bottom: 14px;
+  }
+
+  .carousel-showcase .carousel-showcase-navigation {
+    position: absolute;
+    top: 50%;
+    left: max(calc(50% - 50vw + 32px), calc(50% - 928px));
+    right: max(calc(50% - 50vw + 32px), calc(50% - 928px));
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .carousel-showcase .carousel-showcase-labels {
+    grid-template-columns: none;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    margin-top: 48px;
+  }
+}

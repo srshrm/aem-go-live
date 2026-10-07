@@ -1,0 +1,22 @@
+{
+  "variantName": "columns-mosaic",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "dense",
+    "purpose": "customer-photo-collage",
+    "imagePattern": "image-only",
+    "structure": "5 columns stacked images, center device"
+  },
+  "contentPattern": "5 columns stacked images, center device",
+  "usage": {
+    "pagesUsing": [
+      { "url": "https://frame.io/", "instanceId": null, "screenshot": "migration-work/screenshot.png" }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-03T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

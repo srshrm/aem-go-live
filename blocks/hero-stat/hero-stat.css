@@ -1,0 +1,302 @@
+/*
+ * hero-stat: full-bleed stat banner. Headline + CTA/attribution on the left,
+ * square glowing-ring media (poster + background video) bleeding off the right.
+ * Values extracted from frame.io PotholeV4 module (computed styles).
+ */
+
+/* full-bleed: escape the section content column */
+main > .section > .hero-stat-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+/* first module in a section sits flush against the section edge */
+main > .section > .hero-stat-wrapper:first-child {
+  margin-top: -64px;
+}
+
+/* last module in a section tucks under the following covering panel */
+main > .section:has(+ .section.navy-panel, + .section.dark-panel) > .hero-stat-wrapper:last-child {
+  margin-bottom: calc(-64px - 170px);
+}
+
+.hero-stat {
+  /*
+   * square media geometry (mobile). Offsets are relative to the media
+   * layer: the block box plus an optional (clipped) upward bleed.
+   */
+  --hero-stat-bleed-top: 0px;
+  --hero-stat-media-size: 150cqw;
+  --hero-stat-media-left: calc(50% - var(--hero-stat-media-size) / 2);
+  --hero-stat-media-top: calc(100% - 390px);
+  --hero-stat-glow-spread: 200px;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px 340px;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--text-color);
+}
+
+/* first-in-section: media above the text */
+main > .section > .hero-stat-wrapper:first-child .hero-stat {
+  --hero-stat-media-top: calc(var(--hero-stat-bleed-top) + 366px - var(--hero-stat-media-size));
+
+  padding: 316px 24px 0;
+}
+
+/* glow may bleed upwards only where a covering panel follows */
+main > .section:has(+ .section.navy-panel, + .section.dark-panel) > .hero-stat-wrapper:last-child .hero-stat {
+  --hero-stat-bleed-top: 300px;
+
+  overflow: clip visible;
+}
+
+.hero-stat.hero-stat-no-media,
+main > .section > .hero-stat-wrapper:first-child .hero-stat.hero-stat-no-media {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* media layer (behind the text) */
+.hero-stat .hero-stat-background {
+  position: absolute;
+  inset: calc(-1 * var(--hero-stat-bleed-top)) 0 0;
+  z-index: -1;
+  overflow: hidden;
+  container-type: inline-size;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.hero-stat .hero-stat-background picture,
+.hero-stat .hero-stat-background video,
+.hero-stat .hero-stat-background::after {
+  position: absolute;
+  top: var(--hero-stat-media-top);
+  left: var(--hero-stat-media-left);
+  display: block;
+  width: var(--hero-stat-media-size);
+  max-width: none;
+  height: var(--hero-stat-media-size);
+  background-color: rgb(0 0 0);
+  object-fit: cover;
+}
+
+.hero-stat .hero-stat-background img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* darkening scrim over the media */
+.hero-stat .hero-stat-background::after {
+  content: '';
+  z-index: 2;
+  background:
+    linear-gradient(0deg, rgb(0 0 0 / 20%), rgb(0 0 0 / 20%)),
+    linear-gradient(19deg, rgb(0 0 0 / 67%) 21.85%, rgb(0 0 0 / 0%) 73.55%);
+}
+
+/* coloured glow, screen-blended over the media */
+.hero-stat .hero-stat-background::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--hero-stat-media-top) - var(--hero-stat-glow-spread));
+  left: calc(var(--hero-stat-media-left) - var(--hero-stat-glow-spread));
+  z-index: 3;
+  width: calc(var(--hero-stat-media-size) + 2 * var(--hero-stat-glow-spread));
+  height: calc(var(--hero-stat-media-size) + 2 * var(--hero-stat-glow-spread));
+  background: radial-gradient(50.08% 75.75% at 50% 80%, rgb(72 42 105) 0%, rgb(72 42 105 / 91%) 33.36%, rgb(72 42 105 / 0%) 100%);
+  mix-blend-mode: screen;
+}
+
+/*
+ * glow variants are set on the pseudo directly (not via a custom property)
+ * so Chrome repaints the whole layer when the block's position changes
+ */
+main > .section > .hero-stat-wrapper:first-child .hero-stat .hero-stat-background::before {
+  background: radial-gradient(50.08% 75.75% at 50% 20%, rgb(72 42 105) 0%, rgb(72 42 105 / 91%) 33.36%, rgb(72 42 105 / 0%) 100%);
+}
+
+/* a following stat banner in the same section uses the blue glow */
+main > .section > .hero-stat-wrapper ~ .hero-stat-wrapper .hero-stat .hero-stat-background::before {
+  background: radial-gradient(50.08% 75.75% at 50% 80%, rgb(0 11 53) 0%, rgb(8 24 97 / 73.7%) 33.36%, rgb(5 64 127 / 41%) 66%, rgb(72 42 105 / 0%) 100%);
+}
+
+.hero-stat .hero-stat-content {
+  position: relative;
+  max-width: 100%;
+  padding: 56px 0;
+  text-align: left;
+}
+
+.hero-stat .hero-stat-content > :first-child {
+  margin-top: 0;
+}
+
+.hero-stat .hero-stat-content > :last-child {
+  margin-bottom: 0;
+}
+
+.hero-stat .hero-stat-content h2 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.hero-stat .hero-stat-content p {
+  margin: 24px 0 0;
+  color: var(--text-color);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+/* "— Source" attribution: the leading dash only shows on desktop */
+.hero-stat .hero-stat-content p.hero-stat-attribution {
+  font-size: 0;
+}
+
+.hero-stat .hero-stat-attribution em {
+  display: block;
+  color: var(--text-color-muted);
+  font-size: 15px;
+  font-style: normal;
+}
+
+/* CTA: ghost glass pill with arrow */
+.hero-stat .hero-stat-content p.button-wrapper,
+.hero-stat .hero-stat-content p:has(> a:only-child) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0 0;
+}
+
+.hero-stat .hero-stat-content p > a:only-child:any-link,
+.hero-stat .hero-stat-content a.button:any-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: var(--button-height);
+  margin: 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--button-radius);
+  padding: 0 24px;
+  background-color: transparent;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--button-font-size);
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  backdrop-filter: blur(15px);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-stat .hero-stat-content p > a:only-child:any-link::after,
+.hero-stat .hero-stat-content a.button:any-link::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 12px;
+  height: 8px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 4h10M7.8 1 11 4 7.8 7'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform 0.2s ease;
+}
+
+.hero-stat .hero-stat-content p > a:only-child:hover,
+.hero-stat .hero-stat-content p > a:only-child:focus-visible,
+.hero-stat .hero-stat-content a.button:hover,
+.hero-stat .hero-stat-content a.button:focus-visible {
+  background-color: var(--button-glass-bg);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.hero-stat .hero-stat-content p > a:only-child:hover::after,
+.hero-stat .hero-stat-content a.button:hover::after {
+  transform: translateX(2px);
+}
+
+@media (width >= 900px) {
+  main > .section > .hero-stat-wrapper:first-child {
+    margin-top: calc(-1 * var(--section-padding));
+  }
+
+  main > .section > .hero-stat-wrapper:not(:last-child) {
+    margin-bottom: 156px;
+  }
+
+  main > .section:has(+ .section.navy-panel, + .section.dark-panel) > .hero-stat-wrapper:last-child {
+    margin-bottom: calc(-1 * var(--section-padding) - 248px);
+  }
+
+  .hero-stat {
+    --hero-stat-media-size: min(100cqw, 1500px);
+    --hero-stat-media-left: calc(50% + min(472px, 50% - 96px) - var(--hero-stat-media-size) / 2);
+    --hero-stat-media-top: var(--hero-stat-bleed-top);
+    --hero-stat-glow-spread: 300px;
+
+    flex-direction: row;
+    align-items: center;
+    min-height: 700px;
+    padding: 0 max(32px, (100% - var(--content-max-width)) / 2);
+  }
+
+  main > .section > .hero-stat-wrapper:first-child .hero-stat {
+    --hero-stat-media-top: calc(100% + 200px - var(--hero-stat-media-size));
+
+    padding: 0 max(32px, (100% - var(--content-max-width)) / 2);
+  }
+
+  main > .section:has(+ .section.navy-panel, + .section.dark-panel) > .hero-stat-wrapper:last-child .hero-stat {
+    min-height: 680px;
+    padding-bottom: 144px;
+  }
+
+  .hero-stat .hero-stat-content {
+    max-width: 528px;
+  }
+
+  .hero-stat .hero-stat-content p.hero-stat-attribution {
+    padding-inline-start: 7px;
+    font-size: 15px;
+  }
+
+  .hero-stat .hero-stat-attribution em {
+    display: inline;
+    margin-inline-start: 3px;
+  }
+
+  .hero-stat .hero-stat-content h2 {
+    font-size: 38px;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+  }
+}
+
+@media (width >= 1240px) {
+  .hero-stat .hero-stat-content {
+    max-width: 436px;
+  }
+
+  .hero-stat .hero-stat-content h2 {
+    font-size: var(--heading-size-xl);
+    line-height: 1.02;
+  }
+}

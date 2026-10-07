@@ -1,0 +1,100 @@
+/* columns-mosaic: full-bleed staggered photo collage with an overlaid centre device */
+.columns-mosaic {
+  /* card size, gutter and stagger unit (values from source computed styles) */
+  --columns-mosaic-card: 42.8vw;
+  --columns-mosaic-gap: 10px;
+  --columns-mosaic-unit: 20px;
+  --columns-mosaic-top: 160px;
+  --columns-mosaic-device-width: 180px;
+  --columns-mosaic-device-top: 50px;
+
+  position: relative;
+  width: 100vw;
+
+  /* source mosaic starts flush below the section CTA: cancel the 48px block spacing */
+  margin-top: -48px;
+  margin-left: calc(50% - 50vw);
+  overflow: clip visible;
+  color: var(--text-color);
+}
+
+.columns-mosaic .columns-mosaic-grid {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--columns-mosaic-gap);
+  padding-top: var(--columns-mosaic-top);
+}
+
+.columns-mosaic .columns-mosaic-col {
+  display: flex;
+  flex: 0 0 var(--columns-mosaic-card);
+  flex-direction: column;
+  gap: var(--columns-mosaic-gap);
+  width: var(--columns-mosaic-card);
+  min-width: 0;
+}
+
+/* staggered vertical offsets: 0, -2u, [device], -3u, -1u */
+.columns-mosaic .columns-mosaic-col.columns-mosaic-offset {
+  transform: translateY(calc(var(--columns-mosaic-unit) * -2));
+}
+
+.columns-mosaic.columns-mosaic-5-cols .columns-mosaic-col:nth-child(4) {
+  transform: translateY(calc(var(--columns-mosaic-unit) * -3));
+}
+
+.columns-mosaic.columns-mosaic-5-cols .columns-mosaic-col:nth-child(5) {
+  transform: translateY(calc(var(--columns-mosaic-unit) * -1));
+}
+
+.columns-mosaic .columns-mosaic-item {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 24px;
+  background-color: rgb(9 10 24);
+  line-height: 0;
+}
+
+.columns-mosaic .columns-mosaic-item picture,
+.columns-mosaic .columns-mosaic-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.columns-mosaic .columns-mosaic-item img {
+  object-fit: cover;
+}
+
+/* centre device mockup: overlaid on top of the photo columns */
+.columns-mosaic .columns-mosaic-col.columns-mosaic-center {
+  position: absolute;
+  z-index: 2;
+  top: var(--columns-mosaic-device-top);
+  left: 50%;
+  width: var(--columns-mosaic-device-width);
+  transform: translateX(-50%);
+}
+
+.columns-mosaic .columns-mosaic-center .columns-mosaic-item {
+  aspect-ratio: auto;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.columns-mosaic .columns-mosaic-center .columns-mosaic-item img {
+  height: auto;
+  object-fit: fill;
+}
+
+@media (width >= 900px) {
+  .columns-mosaic {
+    --columns-mosaic-card: min(354px, 26.2vw);
+    --columns-mosaic-gap: 16px;
+    --columns-mosaic-unit: calc(var(--columns-mosaic-card) * 0.13);
+    --columns-mosaic-device-width: 333px;
+    --columns-mosaic-device-top: 94px;
+  }
+}

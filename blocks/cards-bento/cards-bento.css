@@ -1,0 +1,140 @@
+/*
+ * cards-bento: equal dark-glass feature cards, UI image on top, centred text below.
+ * Values extracted from frame.io (article[class*='Bentos_bentos']) computed styles.
+ * Bento rhythm per row of three: 1st = inset image, 2nd = glass-framed image,
+ * 3rd = full-bleed image anchored to the top edge.
+ */
+.cards-bento > ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-bento .cards-bento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-image: linear-gradient(140deg, rgb(27 27 38) -41.97%, rgb(9 9 13) 77.06%);
+  overflow: hidden;
+}
+
+/* hairline glass edge */
+.cards-bento .cards-bento-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgb(157 157 255 / 5%);
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+/* media */
+.cards-bento .cards-bento-card-image {
+  position: relative;
+  padding: 32px 32px 0;
+  line-height: 0;
+}
+
+.cards-bento .cards-bento-card-image picture {
+  display: block;
+}
+
+.cards-bento .cards-bento-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 2nd card: image inside a frosted glass frame */
+.cards-bento .cards-bento-card:nth-child(3n + 2) .cards-bento-card-image {
+  padding: 32px 37.5px 0;
+}
+
+.cards-bento .cards-bento-card:nth-child(3n + 2) .cards-bento-card-image picture {
+  padding: 6px;
+  border: 1px solid rgb(157 157 255 / 5%);
+  border-radius: 10px;
+  background-color: rgb(157 157 255 / 5%);
+  backdrop-filter: blur(16px);
+}
+
+.cards-bento .cards-bento-card:nth-child(3n + 2) .cards-bento-card-image img {
+  border-radius: 5px;
+}
+
+/* 3rd card: full-bleed image pinned to the top, running under the text */
+.cards-bento .cards-bento-card:nth-child(3n) .cards-bento-card-image {
+  height: 218px;
+  padding: 0;
+}
+
+.cards-bento .cards-bento-card:nth-child(3n) .cards-bento-card-image img {
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(100% + 124px);
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+/* text */
+.cards-bento .cards-bento-card-body {
+  position: relative;
+  margin: 40px 0 48px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.cards-bento .cards-bento-card-body h6 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 19.5px;
+}
+
+.cards-bento .cards-bento-card-body p {
+  margin: 4px 0 0;
+  color: var(--text-color-muted);
+  font-size: 15px;
+  line-height: 21.75px;
+}
+
+.cards-bento .cards-bento-card-body > :first-child {
+  margin-top: 0;
+}
+
+.cards-bento .cards-bento-card-body > :last-child {
+  margin-bottom: 0;
+}
+
+@media (width >= 768px) {
+  .cards-bento > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (width >= 900px) {
+  .cards-bento .cards-bento-card-image {
+    padding: 40px 40px 0;
+  }
+
+  .cards-bento .cards-bento-card:nth-child(3n + 2) .cards-bento-card-image {
+    padding: 40px 37.5px 0;
+  }
+
+  /* source art-directs a cropped (255 x 202) frame on desktop */
+  .cards-bento .cards-bento-card:nth-child(3n + 2) .cards-bento-card-image img {
+    aspect-ratio: 255 / 202;
+    object-fit: cover;
+  }
+
+  .cards-bento .cards-bento-card:nth-child(3n) .cards-bento-card-image {
+    height: 226px;
+    padding: 0;
+  }
+}

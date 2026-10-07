@@ -1,0 +1,47 @@
+/* Brand tokens extracted from https://frame.io/ (see migration-work/brand.json) */
+:root {
+  /* fonts — FrameGothic / NeueMachinaInktrap are proprietary; Inter is the loaded fallback */
+  --heading-font-family: framegothic, inter, inter-fallback, sans-serif;
+  --body-font-family: framegothic, inter, inter-fallback, sans-serif;
+  --eyebrow-font-family: neuemachinainktrap, inter, inter-fallback, sans-serif;
+
+  /* colors */
+  --background-color: #000;
+  --text-color: #fcfcfc;
+  --text-color-muted: rgb(234 234 255 / 50%);
+  --body-text-color: #dedfee;
+  --link-color: #fcfcfc;
+  --link-hover-color: #6199f6;
+  --eyebrow-color: #6199f6;
+  --light-color: #f5f5f8;
+  --dark-color: #0e0f20;
+  --border-color: rgb(209 209 251 / 20%);
+
+  /* buttons */
+  --button-height: 40px;
+  --button-radius: 100px;
+  --button-font-size: 14px;
+  --button-primary-bg: #f5f5f8;
+  --button-primary-border: #c1c2d9;
+  --button-primary-color: #000;
+  --button-glass-bg: rgb(209 209 251 / 20%);
+
+  /* section backgrounds */
+  --section-hero-gradient: linear-gradient(195deg, rgb(10 0 30) 0%, rgb(2 0 10) 80%, rgb(12 29 50) 100%);
+  --section-dark-panel-gradient: radial-gradient(88.74% 117.03% at 0% 1.38%, rgb(14 15 32) 0%, rgb(14 16 35) 26.36%, rgb(14 15 32) 33.88%, rgb(14 15 33) 40.23%, rgb(0 0 0) 63.04%);
+  --section-navy-panel-gradient: radial-gradient(157.51% 137.52% at 0% 5.54%, rgb(13 13 24) 0%, rgb(14 13 25) 18.18%, rgb(15 14 28) 22.9%, rgb(16 15 29) 35.16%, rgb(17 16 31) 45.43%, rgb(18 17 31) 56.61%, rgb(12 11 22) 79.4%, rgb(10 9 17) 100%);
+  --section-radius: 40px;
+
+  /* spacing */
+  --section-padding: 124px;
+  --content-max-width: 1080px;
+  --nav-height: 80px;
+
+  /* heading sizes (desktop) */
+  --heading-size-xxl: 80px;
+  --heading-size-xl: 48px;
+  --heading-size-l: 32px;
+  --heading-size-m: 24px;
+  --heading-size-s: 18px;
+  --heading-size-xs: 15px;
+}

@@ -1,0 +1,22 @@
+{
+  "variantName": "cards-feature",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "purpose": "feature-touts",
+    "imagePattern": "icon-optional",
+    "structure": "title + text"
+  },
+  "contentPattern": "title + text",
+  "usage": {
+    "pagesUsing": [
+      { "url": "https://frame.io/", "instanceId": null, "screenshot": "migration-work/screenshot.png" }
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-03T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

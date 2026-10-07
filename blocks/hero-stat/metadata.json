@@ -1,0 +1,22 @@
+{
+  "variantName": "hero-stat",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "stat-banner",
+    "imagePattern": "background-video",
+    "structure": "h2 + CTA or attribution"
+  },
+  "contentPattern": "h2 + CTA or attribution",
+  "usage": {
+    "pagesUsing": [
+      { "url": "https://frame.io/", "instanceId": null, "screenshot": "migration-work/screenshot.png" }
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-10-03T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

@@ -1,0 +1,185 @@
+/*
+ * hero-product: text column (h1, copy, CTAs) + glass-framed product media.
+ * Values extracted from frame.io HeroSideBySide (see migration-work/hero-product-extracted.css).
+ * Source breakpoints: stacked < 768px, stacked tablet 768-1239px, side-by-side >= 1240px.
+ */
+
+/* full-bleed: product UI is clipped at the viewport edge, not the content grid */
+main > .section > .hero-product-wrapper {
+  max-width: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hero-product {
+  display: flex;
+  flex-direction: column;
+  padding: 76px 0 32px;
+  color: var(--text-color);
+}
+
+/* text column */
+.hero-product .hero-product-content {
+  padding: 0 24px;
+}
+
+.hero-product .hero-product-content > :first-child {
+  margin-top: 0;
+}
+
+.hero-product h1 {
+  margin: 0 0 12px;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 48.4px;
+  letter-spacing: -1.32px;
+}
+
+.hero-product .hero-product-content > p {
+  margin: 0;
+  color: var(--body-text-color);
+  font-size: 18px;
+  line-height: 24.3px;
+  letter-spacing: 0.45px;
+}
+
+/* CTAs: stacked full-width pills on mobile */
+.hero-product .hero-product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.hero-product .hero-product-actions p {
+  margin: 0;
+}
+
+main .hero-product .hero-product-actions a.button:any-link {
+  width: 100%;
+  letter-spacing: 0.14px;
+}
+
+/* glass pill carries a trailing arrow on the source */
+main .hero-product .hero-product-actions a.button.secondary:any-link::after {
+  content: "\2192";
+  margin-left: 6px;
+}
+
+/* media column: glass frame around the product UI */
+.hero-product .hero-product-media {
+  padding: 48px 16px 0;
+  line-height: 0;
+}
+
+.hero-product .hero-product-media picture {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4px;
+  border: 1px solid rgb(157 157 255 / 5%);
+  border-radius: 6px;
+  background-color: rgb(157 157 255 / 5%);
+  backdrop-filter: blur(16px);
+}
+
+.hero-product .hero-product-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background-color: #000;
+}
+
+@media (width >= 768px) {
+  .hero-product {
+    padding: 88px 0 48px;
+  }
+
+  /* copy spans 8 of 12 grid columns (16px gutters) */
+  .hero-product h1,
+  .hero-product .hero-product-content > p {
+    max-width: calc((100% - 176px) * 2 / 3 + 112px);
+  }
+
+  .hero-product h1 {
+    font-size: 56px;
+    line-height: 58.24px;
+    letter-spacing: -2.52px;
+  }
+
+  .hero-product .hero-product-content > p {
+    font-size: 17px;
+    line-height: 24.65px;
+    letter-spacing: normal;
+  }
+
+  .hero-product .hero-product-actions {
+    flex-flow: row wrap;
+  }
+
+  main .hero-product .hero-product-actions a.button:any-link {
+    width: auto;
+  }
+
+  .hero-product .hero-product-media {
+    padding: 96px 24px 0;
+  }
+
+  .hero-product .hero-product-media picture {
+    padding: 6px;
+    border-radius: 10px;
+  }
+}
+
+@media (width >= 1240px) {
+  .hero-product {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 124px 0 62px;
+  }
+
+  .hero-product .hero-product-content {
+    flex: 0 1 620px;
+    box-sizing: border-box;
+    min-width: 0;
+    padding: 0 68px 0 48px;
+  }
+
+  .hero-product h1,
+  .hero-product .hero-product-content > p {
+    max-width: none;
+  }
+
+  .hero-product h1 {
+    font-size: 80px;
+    line-height: 83.2px;
+    letter-spacing: -3.6px;
+  }
+
+  .hero-product .hero-product-content > p {
+    font-size: 18px;
+    line-height: 26.1px;
+  }
+
+  .hero-product .hero-product-media {
+    flex: 1 1 660px;
+    min-width: 0;
+    padding: 0;
+  }
+
+  /* fixed-size product frame bleeds past the right viewport edge */
+  .hero-product .hero-product-media picture {
+    width: 1000px;
+  }
+
+  .hero-product.hero-product-no-media .hero-product-content {
+    flex-basis: 100%;
+  }
+}
