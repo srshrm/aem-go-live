@@ -164,6 +164,10 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
+    if (main.querySelector('div.personalization')) {
+      const { initPersonalization } = await import('./personalization/index.js');
+      initPersonalization(main);
+    }
     decorateMain(main);
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);

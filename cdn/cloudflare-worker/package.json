@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "aem-prod-worker",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "log": "wrangler tail -f pretty"
+  },
+  "license": "Apache-2.0"
+}
