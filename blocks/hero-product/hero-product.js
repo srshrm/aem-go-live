@@ -29,8 +29,11 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const cells = row.children.length ? [...row.children] : [row];
     cells.forEach((cell) => {
-      cell.querySelectorAll('picture').forEach((picture) => {
-        const parent = picture.parentElement;
+      // external images may arrive as a bare <img> (no <picture>), e.g. in local preview
+      cell.querySelectorAll('picture, img:not(picture img)').forEach((el) => {
+        const parent = el.parentElement;
+        const picture = el.tagName === 'IMG' ? document.createElement('picture') : el;
+        if (picture !== el) picture.append(el);
         media.append(picture);
         if (parent && parent !== cell && !parent.textContent.trim() && !parent.children.length) {
           parent.remove();
@@ -51,7 +54,12 @@ export default function decorate(block) {
 
   if (actions.children.length) content.append(actions);
 
+  // only same-origin media is optimized; external CDN URLs keep their own params
   media.querySelectorAll('picture > img').forEach((img) => {
+    if (new URL(img.src, window.location.href).origin !== window.location.origin) {
+      img.loading = 'eager';
+      return;
+    }
     img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, true, [
       { media: '(min-width: 900px)', width: '1600' },
       { width: '750' },
