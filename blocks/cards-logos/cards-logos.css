@@ -1,0 +1,122 @@
+/* cards-logos: full-bleed single-row logo marquee (values from frame.io LogoWall) */
+
+/* marquee spans the full viewport, like the source LogoWall */
+main > .section > .cards-logos-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+/* source LogoWall sits flush against the module above; its own padding sets the spacing */
+main > .section > div + .cards-logos-wrapper {
+  margin-top: 0;
+}
+
+.cards-logos {
+  --logo-gap: 84px;
+  --logo-scale: 0.75;
+
+  overflow: hidden;
+  padding: 32px 0 48px;
+  color: var(--text-color);
+}
+
+.cards-logos .cards-logos-track {
+  display: flex;
+  width: max-content;
+}
+
+.cards-logos .cards-logos-list {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--logo-gap);
+  margin: 0;
+
+  /* trailing space equal to the gap keeps the -50% loop seamless */
+  padding: 0 var(--logo-gap) 0 0;
+  list-style: none;
+}
+
+.cards-logos .cards-logos-item {
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.cards-logos .cards-logos-item a,
+.cards-logos .cards-logos-item picture {
+  display: block;
+}
+
+.cards-logos .cards-logos-item img {
+  display: block;
+  width: auto;
+  height: calc(var(--logo-height, 39px) * var(--logo-scale));
+}
+
+/* logos are drawn at their native SVG viewBox size (set by the block JS) */
+.cards-logos .cards-logos-item.cards-logos-sized img {
+  width: calc(var(--logo-width) * var(--logo-scale));
+  height: calc(var(--logo-height) * var(--logo-scale));
+}
+
+.cards-logos.cards-logos-animated .cards-logos-track {
+  animation: cards-logos-marquee 45s linear infinite;
+}
+
+.cards-logos.cards-logos-animated:hover .cards-logos-track {
+  animation-play-state: paused;
+}
+
+@keyframes cards-logos-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cards-logos .cards-logos-track,
+  .cards-logos.cards-logos-animated .cards-logos-track {
+    display: block;
+    width: auto;
+    animation: none;
+  }
+
+  /* static fallback mirrors the source LogoWall layout (space-between, 16px x 10px) */
+  .cards-logos .cards-logos-list {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px 10px;
+    box-sizing: border-box;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .cards-logos .cards-logos-list[aria-hidden='true'] {
+    display: none;
+  }
+}
+
+@media (width >= 900px) {
+  .cards-logos {
+    --logo-gap: 96px;
+    --logo-scale: 1;
+
+    padding: 62px 0;
+  }
+
+  /* ~28px/s, matching the source scroll speed */
+  .cards-logos.cards-logos-animated .cards-logos-track {
+    animation-duration: 56s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (width >= 900px) {
+  .cards-logos .cards-logos-list {
+    padding: 0 32px;
+  }
+}

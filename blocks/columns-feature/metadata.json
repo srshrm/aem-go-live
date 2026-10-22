@@ -1,0 +1,22 @@
+{
+  "variantName": "columns-feature",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "alternating-feature-rows",
+    "imagePattern": "layered-ui-image",
+    "structure": "features list + CTA | image (alternating)"
+  },
+  "contentPattern": "features list + CTA | image (alternating)",
+  "usage": {
+    "pagesUsing": [
+      { "url": "https://frame.io/", "instanceId": null, "screenshot": "migration-work/screenshot.png" }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-03T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

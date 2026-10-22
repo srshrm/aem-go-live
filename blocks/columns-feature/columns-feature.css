@@ -1,0 +1,251 @@
+/* columns-feature: alternating rows of [feature list + ghost CTA | layered product UI]
+ * values extracted from frame.io SideBySides (see migration-work/columns-feature-extracted.css)
+ */
+.columns-feature {
+  /* distance from the content edge to the viewport edge (section > div padding) */
+  --cf-gutter: 24px;
+  --cf-glass: rgb(157 157 255 / 5%);
+
+  display: flex;
+  flex-direction: column;
+  gap: 84px;
+  color: var(--text-color);
+}
+
+.columns-feature > .columns-feature-row {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ---------- media: desktop screenshot + phone overlay in glass frames ---------- */
+
+/* mobile: image above text regardless of authored order.
+ * the cell bleeds to the viewport edge and clips the oversized frames there */
+.columns-feature .columns-feature-media {
+  position: relative;
+  order: 0;
+  margin-inline: calc(-1 * var(--cf-gutter));
+  overflow-x: clip;
+  aspect-ratio: 390 / 520;
+  max-height: 520px;
+  line-height: 0;
+}
+
+.columns-feature .columns-feature-text {
+  order: 1;
+}
+
+.columns-feature .columns-feature-media picture {
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid var(--cf-glass);
+  border-radius: 10px;
+  padding: 6px;
+  background-color: var(--cf-glass);
+  backdrop-filter: blur(16px);
+}
+
+.columns-feature .columns-feature-media img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  background-color: #000;
+}
+
+/* single image (no overlay): plain framed image in flow */
+.columns-feature .columns-feature-media:not(.columns-feature-layered) {
+  margin-inline: 0;
+  aspect-ratio: auto;
+  max-height: none;
+}
+
+.columns-feature .columns-feature-layered picture {
+  position: absolute;
+}
+
+/* large desktop UI frame, partially off-screen */
+.columns-feature .columns-feature-layered .columns-feature-primary {
+  bottom: 0;
+  left: 29%;
+  height: 95%;
+  aspect-ratio: 1275 / 723;
+}
+
+.columns-feature .columns-feature-layered .columns-feature-primary img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* phone UI frame in front */
+.columns-feature .columns-feature-layered .columns-feature-overlay {
+  z-index: 1;
+  top: 0;
+  left: var(--cf-gutter);
+  width: min(69.2%, 270px);
+}
+
+/* image-first rows mirror the composition */
+.columns-feature .columns-feature-media-first .columns-feature-layered .columns-feature-primary {
+  right: 29%;
+  left: auto;
+}
+
+.columns-feature .columns-feature-media-first .columns-feature-layered .columns-feature-overlay {
+  right: var(--cf-gutter);
+  left: auto;
+}
+
+/* ---------- text: feature list + ghost CTA ---------- */
+
+.columns-feature .columns-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.columns-feature .columns-feature-item h3,
+.columns-feature .columns-feature-text h3 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: normal;
+}
+
+.columns-feature .columns-feature-text p {
+  margin: 4px 0 0;
+  color: var(--text-color-muted);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.columns-feature .columns-feature-text > :first-child {
+  margin-top: 0;
+}
+
+/* CTA paragraph after the list */
+.columns-feature .columns-feature-text > p:has(> a:only-child) {
+  margin: 32px 0 0;
+}
+
+.columns-feature .columns-feature-text > p > a:only-child:any-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
+  height: var(--button-height);
+  margin: 0;
+  border: 0;
+  border-radius: var(--button-radius);
+  padding: 0 24px;
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1px var(--border-color);
+  color: var(--text-color);
+  font-size: var(--button-font-size);
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  backdrop-filter: blur(15px);
+  transition: background-color 0.3s cubic-bezier(0, 0.44, 0.6, 1), box-shadow 0.3s cubic-bezier(0, 0.44, 0.6, 1);
+}
+
+/* arrow icon (tail + chevron head) */
+.columns-feature .columns-feature-text > p > a:only-child::after {
+  content: '';
+  flex: none;
+  width: 12px;
+  height: 8px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Crect x='1.7' y='3.2' width='9.8' height='1.6' rx='.8'/%3E%3Cpath d='M7.8.8 11 4 7.8 7.2' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.columns-feature .columns-feature-text > p > a:only-child:hover,
+.columns-feature .columns-feature-text > p > a:only-child:focus-visible {
+  background-color: rgb(220 220 255 / 30%);
+  box-shadow: inset 0 0 0 2px rgb(189 189 244 / 10%);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+@media (width >= 900px) {
+  .columns-feature {
+    /* section > div: max-width var(--content-max-width), 32px side padding */
+    --cf-gutter: max(32px, calc((100vw - var(--content-max-width)) / 2));
+
+    gap: 124px;
+  }
+
+  .columns-feature > .columns-feature-row {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+    gap: 0 24px;
+  }
+
+  .columns-feature .columns-feature-media,
+  .columns-feature .columns-feature-text {
+    grid-row: 1;
+    order: unset;
+  }
+
+  /* text left, media right (bleeds to the right viewport edge) */
+  .columns-feature .columns-feature-text {
+    grid-column: 1 / span 3;
+  }
+
+  .columns-feature .columns-feature-media {
+    grid-column: 7 / -1;
+    justify-self: stretch;
+    margin-inline: 0 calc(-1 * var(--cf-gutter));
+
+    /* width drives height: stop min/max-height transferring to width */
+    min-width: 0;
+    aspect-ratio: 0.93;
+    min-height: 720px;
+    max-height: 800px;
+  }
+
+  .columns-feature .columns-feature-media-first .columns-feature-media {
+    grid-column: 1 / span 6;
+    margin-inline: calc(-1 * var(--cf-gutter)) 0;
+  }
+
+  .columns-feature .columns-feature-media-first .columns-feature-text {
+    grid-column: 8 / span 3;
+  }
+
+  .columns-feature .columns-feature-media:not(.columns-feature-layered) {
+    margin-inline: 0;
+    min-height: 0;
+  }
+
+  .columns-feature .columns-feature-layered .columns-feature-primary {
+    top: 0;
+    bottom: auto;
+    left: min(90px, 6.94vw);
+  }
+
+  .columns-feature .columns-feature-media-first .columns-feature-layered .columns-feature-primary {
+    right: min(90px, 6.94vw);
+    left: auto;
+  }
+
+  .columns-feature .columns-feature-layered .columns-feature-overlay {
+    top: 50%;
+    left: 0;
+    width: clamp(328px, 50%, 360px);
+    transform: translateY(-50%);
+  }
+
+  .columns-feature .columns-feature-media-first .columns-feature-layered .columns-feature-overlay {
+    right: 0;
+    left: auto;
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "variantName": "carousel-showcase",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "product-showcase",
+    "imagePattern": "large-screenshot",
+    "structure": "slide image + tout labels + arrows"
+  },
+  "contentPattern": "slide image + tout labels + arrows",
+  "usage": {
+    "pagesUsing": [
+      { "url": "https://frame.io/", "instanceId": null, "screenshot": "migration-work/screenshot.png" }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-03T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

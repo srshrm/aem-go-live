@@ -1,0 +1,22 @@
+{
+  "variantName": "hero-product",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "page-intro",
+    "imagePattern": "side-media",
+    "structure": "h1 + paragraph + 2 CTAs + product media right"
+  },
+  "contentPattern": "h1 + paragraph + 2 CTAs + product media right",
+  "usage": {
+    "pagesUsing": [
+      { "url": "https://frame.io/", "instanceId": null, "screenshot": "migration-work/screenshot.png" }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-03T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

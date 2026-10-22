@@ -165,6 +165,10 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    if (main.querySelector(':scope > .section[data-personalization]')) {
+      const { personalizeSections } = await import('./personalization/sections.js');
+      await personalizeSections(main);
+    }
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
@@ -188,6 +192,10 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+  if (main.querySelector(':scope > .section[data-personalization]')) {
+    const { personalizeSectionsLazy } = await import('./personalization/sections.js');
+    personalizeSectionsLazy(main);
+  }
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
